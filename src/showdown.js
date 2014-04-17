@@ -117,23 +117,28 @@ var g_output_modifiers = [];
 // Automatic Extension Loading (node only):
 //
 
-if (typeof module !== 'undefind' && typeof exports !== 'undefined' && typeof require !== 'undefind') {
-	var fs = require('fs');
+// if (typeof module !== 'undefined' && typeof exports !== 'undefined' && typeof require !== 'undefined') {
+// 	var fs = require('fs');
 
-	if (fs) {
-		// Search extensions folder
-		var extensions = fs.readdirSync((__dirname || '.')+'/extensions').filter(function(file){
-			return ~file.indexOf('.js');
-		}).map(function(file){
-			return file.replace(/\.js$/, '');
-		});
-		// Load extensions into Showdown namespace
-		Showdown.forEach(extensions, function(ext){
-			var name = stdExtName(ext);
-			Showdown.extensions[name] = require('./extensions/' + ext);
-		});
-	}
-}
+// 	if (fs) {
+// 		// Search extensions folder
+// 		var extensions = fs.readdirSync((__dirname || '.')+'/extensions').filter(function(file){
+// 			return ~file.indexOf('.js');
+// 		}).map(function(file){
+// 			return file.replace(/\.js$/, '');
+// 		});
+// 		// Load extensions into Showdown namespace
+// 		Showdown.forEach(extensions, function(ext){
+// 			var name = stdExtName(ext);
+// 			Showdown.extensions[name] = require('./extensions/' + ext);
+// 		});
+// 	}
+// }
+
+Showdown.extensions['github'] = require('./extensions/github');
+Showdown.extensions['prettify'] = require('./extensions/prettify');
+Showdown.extensions['table'] = require('./extensions/table');
+Showdown.extensions['twitter'] = require('./extensions/twitter');
 
 this.makeHtml = function(text) {
 //
